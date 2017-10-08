@@ -1,6 +1,6 @@
 # jquery-mailchimp
 
-This is a jQuery plugin to simplify work with MailChimp forms. 
+This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [ajaxChimp][2])
 
 ## Improvements
 
@@ -13,3 +13,4 @@ This repository can be used under the MIT license.
 > See [LICENSE][1] for more details.
 
 [1]: https://en.wikipedia.org/wiki/MIT_License
+[2]: https://github.com/scdoshi/jquery-ajaxchimp
