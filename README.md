@@ -2,9 +2,6 @@
 
 This is a jquery plugin to handle MailChimp forms. 
 
-## Installation guide
-
-
 ## Improvements
 
 Have an idea how to improve this module? 
