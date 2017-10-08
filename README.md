@@ -1,6 +1,6 @@
 # jquery-mailchimp
 
-This is a jquery plugin to handle MailChimp forms. 
+This is a jQuery plugin to simplify work with MailChimp forms. 
 
 ## Improvements
 
