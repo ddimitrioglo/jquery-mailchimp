@@ -1,0 +1,27 @@
+{
+  "name": "jquery-mailchimp",
+  "version": "1.0.1",
+  "description": "jQuery plugin to simplify work with MailChimp",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddimitrioglo/jquery-mailchimp.git"
+  },
+  "keywords": [
+    "jQuery",
+    "MailChimp",
+    "ajax"
+  ],
+  "homepage": "https://ddimitrioglo.github.io/jquery-mailchimp/",
+  "bugs": {
+    "url": "https://github.com/ddimitrioglo/jquery-mailchimp/issues"
+  },
+  "author": "ddimitrioglo",
+  "license": "MIT",
+  "devDependencies": {
+    "uglify-es": "^3.1.3"
+  }
+}
