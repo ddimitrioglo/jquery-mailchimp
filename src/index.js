@@ -111,6 +111,7 @@
       function onError(message, inputIndex) {
         if (inputIndex) {
           inputs[inputIndex].$errorEl.text(message);
+          inputs[inputIndex].$inputEl.trigger('mc:input:error');
         } else {
           cfg.onFail(message);
         }
