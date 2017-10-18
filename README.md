@@ -53,7 +53,7 @@ Instead of using MailChimp's standard embedded forms:
 ```
 
 You just have to use:
-* Form action: `https://github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812`
+* Form action: `//github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812`
 * Form `fnames` (keep them ordered): `EMAIL,FULLNAME`
 
 And you are ready to use `jquery-mailchimp` approach:
@@ -64,7 +64,7 @@ And you are ready to use `jquery-mailchimp` approach:
 
 ```javascript
 $('#subscribe-form').MailChimpForm({
-  url: 'github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812',
+  url: '//github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812',
   fields: 'EMAIL,FULLNAME',
   submitSelector: '#submit-form'
 });
