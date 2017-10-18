@@ -2,7 +2,7 @@
 
 This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [ajaxChimp][2])
 
-## Set-up
+## Getting Started
 
 Instead of using MailChimp's standard embedded forms:
 
@@ -21,8 +21,7 @@ Instead of using MailChimp's standard embedded forms:
             <h2>Subscribe to our mailing list</h2>
             <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
             <div class="mc-field-group">
-                <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-                </label>
+                <label for="mce-EMAIL">Email Address </label>
                 <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
             </div>
             <div class="mc-field-group">
@@ -70,7 +69,8 @@ $('#subscribe-form').MailChimpForm({
 });
 ```
 
-1. Add a wrapper to your inputs with class `mc-form-group-` + `INPUT_NAME` and `<div class="mc-error"></div>` to show validation errors:
+3. Write custom form, just add a wrapper to your inputs with class `mc-form-group-` + `INPUT_NAME` and 
+`<div class="mc-error"></div>` to show validation errors:
 
 ```html
 <div class="mc-form-group-FULLNAME">
@@ -79,9 +79,11 @@ $('#subscribe-form').MailChimpForm({
 </div>
 ```
 
-That's it!
+4. Enjoy!
 
-Check our [demo][3] to see how it works
+## Demo
+
+Please check our [demo][3] to see how it works, btw you can subscribe and we will let you know about plugin updates :wink:
 
 ## Improvements
 
