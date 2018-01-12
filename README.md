@@ -1,8 +1,8 @@
 # jquery-mailchimp
 
-This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [ajaxChimp][2])
+This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [ajaxChimp][1])
 
-## Getting Started
+### Getting Started
 
 Instead of using MailChimp's standard embedded forms:
 
@@ -81,20 +81,39 @@ $('#subscribe-form').MailChimpForm({
 
 4. Enjoy!
 
-## Demo
+### Demo
 
-Please check our [demo][3] to see how it works, btw you can subscribe and we will let you know about plugin updates :wink:
+Please check our [demo][2] to see how it works, btw you can subscribe and we will let you know about plugin updates :wink:
 
-## Improvements
+### Available configs
 
-Have an idea how to improve this module? 
-Feel free to contribute or open an issue with `enhancement` label.
+```text
+{
+  url: <string>,            // default: form="action"
+  fields: <string>,         // default: ''
+  inputSelector: <string>,  // default: 'input'
+  errorSelector: <string>,  // default: '.mc-error'
+  submitSelector: <string>, // default: '',
+  onFail: <function>,       // default: function(message) { console.log(message) }
+  onOk: <function>          // default: function(message) { console.log(message) }
+}
+```
 
-## License
+### Available events
+
+* `mc:input:error` - fired on validation error
+* `mc:input:ok` - fired on validation succeeded
+
+### Improvements
+
+* If you are facing some issues - don't hesitate to open an issue
+* If you have an idea how to improve this module, feel free to contribute or open an issue with `enhancement` label
+
+### License
 
 This repository can be used under the MIT license.
-> See [LICENSE][1] for more details.
+> See [LICENSE][3] for more details.
 
-[1]: https://en.wikipedia.org/wiki/MIT_License
-[2]: https://github.com/scdoshi/jquery-ajaxchimp
-[3]: https://ddimitrioglo.github.io/jquery-mailchimp/
+[1]: https://github.com/scdoshi/jquery-ajaxchimp
+[2]: https://ddimitrioglo.github.io/jquery-mailchimp/
+[3]: https://github.com/ddimitrioglo/jquery-mailchimp/blob/master/LICENSE

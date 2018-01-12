@@ -1,6 +1,6 @@
 {
   "name": "jquery-mailchimp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "jQuery plugin to simplify work with MailChimp",
   "main": "src/index.js",
   "scripts": {

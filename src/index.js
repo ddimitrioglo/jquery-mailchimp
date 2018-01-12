@@ -43,10 +43,11 @@
       let cfg = $.extend({
         url: $form.attr('action'),
         fields: '',
+        inputSelector: 'input',
         errorSelector: '.mc-error',
         submitSelector: '',
-        onFail: function (errMessage) {
-          console.error(errMessage);
+        onFail: function (message) {
+          console.error(message);
         },
         onOk: function (message) {
           console.log(message);
@@ -68,7 +69,7 @@
 
         inputs[index] = {
           name: item,
-          $inputEl: $formGroup.find('input'),
+          $inputEl: $formGroup.find(cfg.inputSelector),
           $errorEl: $formGroup.find(cfg.errorSelector)
         };
       });
@@ -121,8 +122,13 @@
        * Reset previous errors
        */
       function resetErrors() {
-        for (let index in inputs) {
-          inputs[index].$errorEl.text('');
+        for (let inputIndex in inputs) {
+          let input = inputs[inputIndex];
+
+          if (input.$errorEl.text().length) {
+            input.$errorEl.text('');
+            input.$inputEl.trigger('mc:input:ok');
+          }
         }
       }
 

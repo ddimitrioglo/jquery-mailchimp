@@ -1,6 +1,8 @@
 $(function() {
   'use strict';
 
+  const $formInput = $('input');
+
   /**
    * Init MailChimpForm
    */
@@ -13,9 +15,17 @@ $(function() {
   /**
    * mc:input:error event handler
    */
-  $('input').on('mc:input:error', function() {
-    alert('mc:input:error event fired');
+  $formInput.on('mc:input:error', function() {
+    console.log('mc:input:error event fired');
     $(this).css({'border': '1px solid red'});
+  });
+
+  /**
+   * mc:input:ok event handler
+   */
+  $formInput.on('mc:input:ok', function() {
+    console.log('mc:input:ok event fired');
+    $(this).css({'border': '1px solid green'});
   });
 
 });
