@@ -1,14 +1,14 @@
+'use strict';
+
 (function($){
-  'use strict';
 
   $.fn.MailChimpForm = function(options) {
-
     /**
      * Ajax request wrapper
-     * @param url
-     * @param data
-     * @param onSuccess
-     * @param onError
+     * @param {String} url
+     * @param {Object} data
+     * @param {Function} onSuccess
+     * @param {Function} onError
      */
     function request(url, data, onSuccess, onError) {
       $.ajax({
@@ -28,6 +28,25 @@
     function cancelEvent(event) {
       event.preventDefault();
       event.stopPropagation();
+    }
+
+    /**
+     * Parse fields from config
+     * @param {String} fields
+     */
+    function parseFields(fields = '') {
+      let result = [];
+
+      fields.split(',').map(field => field.trim()).forEach(field => {
+        if (!field.includes(':')) {
+          throw new Error(`${field} should be in format: 0:FIELD1...`);
+        }
+
+        let [ key, value ] = field.split(':');
+        result[key] = value;
+      });
+
+      return result;
     }
 
     /**
@@ -54,7 +73,7 @@
         }
       }, options);
 
-      let fieldsList = cfg.fields.split(',').map(field => field.trim());
+      let fieldsList = parseFields(cfg.fields);
       let $submitElement = $(cfg.submitSelector);
 
       if (!cfg.url) {
@@ -106,8 +125,8 @@
 
       /**
        * Internal error handler
-       * @param message
-       * @param inputIndex
+       * @param {String} message
+       * @param {Number} inputIndex
        */
       function onError(message, inputIndex) {
         if (inputIndex) {

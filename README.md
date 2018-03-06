@@ -32,7 +32,6 @@ Instead of using MailChimp's standard embedded forms:
                 <div class="response" id="mce-error-response" style="display:none"></div>
                 <div class="response" id="mce-success-response" style="display:none"></div>
             </div>
-            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="xxx" tabindex="-1" value=""></div>
             <div class="clear">
             <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
@@ -53,7 +52,7 @@ Instead of using MailChimp's standard embedded forms:
 
 You just have to use:
 * Form action: `//github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812`
-* Form `fnames` (keep them ordered): `EMAIL,FULLNAME`
+* Array of `fnames` as coma separated `<KEY>:<VALUE>` string: `0:EMAIL,1:FULLNAME`
 
 And you are ready to use `jquery-mailchimp` approach:
 
@@ -64,7 +63,7 @@ And you are ready to use `jquery-mailchimp` approach:
 ```javascript
 $('#subscribe-form').MailChimpForm({
   url: '//github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812',
-  fields: 'EMAIL,FULLNAME',
+  fields: '0:EMAIL,1:FULLNAME',
   submitSelector: '#submit-form'
 });
 ```
