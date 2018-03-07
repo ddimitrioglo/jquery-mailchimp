@@ -9,7 +9,7 @@ This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [aja
 
 > Make sure you have jQuery v1.9+ included in your project
 
-### Getting Started
+### Required data
 
 Instead of using MailChimp's standard embedded forms:
 
@@ -57,11 +57,14 @@ Instead of using MailChimp's standard embedded forms:
 <!--End mc_embed_signup-->
 ```
 
-You just have to use:
-* Form action: `//github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812`
-* Array of `fnames` as coma separated `<KEY>:<VALUE>` string: `0:EMAIL,1:FULLNAME`
+Just pick minimal required data as:
 
-And you are ready to use `jquery-mailchimp` approach:
+* Form action: `//github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812`
+* Transform array of `fnames` into coma separated `<KEY>:<VALUE>` string: `0:EMAIL,1:FULLNAME`
+
+And you are ready to use `jquery-mailchimp`!
+
+### Getting Started
 
 1. Compound your custom form by adding wrappers to the all of your inputs with class `mc-form-group-` + `INPUT_NAME`. 
 And add an error placeholder inside your wrapper `<div class="mc-error"></div>` to show validation errors:
@@ -101,14 +104,14 @@ $('#your-form-id').MailChimpForm({
 });
 ```
 
-### Demo
-
-Please check our [demo][3] to see how it works, btw you can subscribe and we will let you know about plugin updates :wink:
-
 ### Available events
 
 * `mc:input:error` - fired on validation error
 * `mc:input:ok` - fired on validation succeeded
+
+### Demo
+
+Please check our [demo][3] to see how it works, btw you can subscribe and we will let you know about plugin updates :wink:
 
 ### Improvements
 
