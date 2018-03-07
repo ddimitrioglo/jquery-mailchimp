@@ -2,6 +2,13 @@
 
 This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [ajaxChimp][1])
 
+### Installation
+
+* Download [jquery-mailchimp.min.js][2] and add to your project
+* Include it in your template: `<script src="/your/project/path/js/jquery-mailchimp.min.js"></script>`
+
+> Make sure you have jQuery v1.9+ included in your project
+
 ### Getting Started
 
 Instead of using MailChimp's standard embedded forms:
@@ -56,9 +63,19 @@ You just have to use:
 
 And you are ready to use `jquery-mailchimp` approach:
 
-1. Download and add to your project `jquery-mailchimp.min.js`
+1. Compound your custom form by adding wrappers to the all of your inputs with class `mc-form-group-` + `INPUT_NAME`. 
+And add an error placeholder inside your wrapper `<div class="mc-error"></div>` to show validation errors:
 
-2. Initialize plugin:
+```html
+<div class="mc-form-group-FULLNAME">
+    <input type="text" name="FULLNAME" placeholder="Full name">
+    <div class="mc-error"></div>
+</div>
+```
+
+2. Add submit button `<button id="submit-form">Subscribe</button>`
+
+3. Initialize the plugin:
 
 ```javascript
 $('#subscribe-form').MailChimpForm({
@@ -68,35 +85,25 @@ $('#subscribe-form').MailChimpForm({
 });
 ```
 
-3. Write custom form, just add a wrapper to your inputs with class `mc-form-group-` + `INPUT_NAME` and 
-`<div class="mc-error"></div>` to show validation errors:
-
-```html
-<div class="mc-form-group-FULLNAME">
-    <input type="text" name="FULLNAME" placeholder="Full name">
-    <div class="mc-error"></div>
-</div>
-```
-
 4. Enjoy!
-
-### Demo
-
-Please check our [demo][2] to see how it works, btw you can subscribe and we will let you know about plugin updates :wink:
 
 ### Available configs
 
 ```text
-{
-  url: <string>,            // default: form="action"
-  fields: <string>,         // default: ''
-  inputSelector: <string>,  // default: 'input'
-  errorSelector: <string>,  // default: '.mc-error'
-  submitSelector: <string>, // default: '',
-  onFail: <function>,       // default: function(message) { console.log(message) }
-  onOk: <function>          // default: function(message) { console.log(message) }
-}
+$('#your-form-id').MailChimpForm({
+  url: <String>,                    # default: form="action"
+  fields: <String>,                 # default: ''
+  inputSelector: <String>,          # default: 'input'
+  errorSelector: <String>,          # default: '.mc-error'
+  submitSelector: <String>,         # default: '',
+  onFail: <Function>,               # default: function(message) { console.log(message) }
+  onOk: <Function>                  # default: function(message) { console.log(message) }
+});
 ```
+
+### Demo
+
+Please check our [demo][3] to see how it works, btw you can subscribe and we will let you know about plugin updates :wink:
 
 ### Available events
 
@@ -111,8 +118,9 @@ Please check our [demo][2] to see how it works, btw you can subscribe and we wil
 ### License
 
 This repository can be used under the MIT license.
-> See [LICENSE][3] for more details.
+> See [LICENSE][4] for more details.
 
 [1]: https://github.com/scdoshi/jquery-ajaxchimp
-[2]: https://ddimitrioglo.github.io/jquery-mailchimp/
-[3]: https://github.com/ddimitrioglo/jquery-mailchimp/blob/master/LICENSE
+[2]: https://github.com/ddimitrioglo/jquery-mailchimp/blob/master/dist/jquery-mailchimp.min.js
+[3]: https://ddimitrioglo.github.io/jquery-mailchimp/
+[4]: https://github.com/ddimitrioglo/jquery-mailchimp/blob/master/LICENSE

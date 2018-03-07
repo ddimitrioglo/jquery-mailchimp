@@ -1,6 +1,5 @@
-'use strict';
-
 (function($){
+  'use strict';
 
   $.fn.MailChimpForm = function(options) {
     /**
