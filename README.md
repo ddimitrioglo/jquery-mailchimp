@@ -131,8 +131,7 @@ E005 => Too many subscribe attempts
 S001 => Email confirmation step
 ```
 
-> We need your help here, in case you have caught a response which is not in the list, please open your console and \
-send us the details. 
+> We need your help here, in case you have caught a response which is not in the list, please open your console and open an issue with details. 
 
 ### Demo
 

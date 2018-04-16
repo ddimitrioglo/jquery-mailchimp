@@ -171,7 +171,7 @@
     this.code = Object.keys(this.mapping).find(code => this.mapping[code].test(this.message)) || 'UNCAUGHT';
 
     if (this.code === 'UNCAUGHT') {
-      console.warn('In order to improve this plugin, please send the info below to the author.');
+      console.warn('If you see this message, please open an issue (https://github.com/ddimitrioglo/jquery-mailchimp/issues) with details below');
       console.warn(response);
     }
 
