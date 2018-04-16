@@ -11,7 +11,8 @@ This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [aja
 
 ### Required data
 
-Instead of using MailChimp's standard embedded forms:
+<details>
+<summary>Instead of using MailChimp's standard embedded forms</summary>
 
 ```html
 <!-- Begin MailChimp Signup Form -->
@@ -57,10 +58,12 @@ Instead of using MailChimp's standard embedded forms:
 <!--End mc_embed_signup-->
 ```
 
+</details>
+
 Just pick minimal required data as:
 
 * Form action: `//github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812`
-* Transform array of `fnames` into coma separated `<KEY>:<VALUE>` string: `0:EMAIL,1:FULLNAME`
+* Transform array of `fnames` into coma separated `<KEY>:<VALUE>` string like: `0:EMAIL,1:FULLNAME`
 
 And you are ready to use `jquery-mailchimp`!
 
@@ -100,7 +103,8 @@ $('#your-form-id').MailChimpForm({
   errorSelector: <String>,          # default: '.mc-error'
   submitSelector: <String>,         # default: '',
   onFail: <Function>,               # default: function(message) { console.log(message) }
-  onOk: <Function>                  # default: function(message) { console.log(message) }
+  onOk: <Function>,                 # default: function(message) { console.log(message) }
+  customMessages: <Object>,         # default: {}
 });
 ```
 
@@ -108,6 +112,27 @@ $('#your-form-id').MailChimpForm({
 
 * `mc:input:error` - fired on validation error
 * `mc:input:ok` - fired on validation succeeded
+
+### Available response codes:
+
+#### Errors
+
+```text
+E001 => Input is empty
+E002 => Wrong date
+E003 => No @ sign in email
+E004 => Invalid email address
+E005 => Too many subscribe attempts
+```
+
+#### Success
+
+```text
+S001 => Email confirmation step
+```
+
+> We need your help here, in case you have caught a response which is not in the list, please open your console and \
+send us the details. 
 
 ### Demo
 

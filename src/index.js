@@ -1,53 +1,7 @@
 (function($){
   'use strict';
 
-  $.fn.MailChimpForm = function(options) {
-    /**
-     * Ajax request wrapper
-     * @param {String} url
-     * @param {Object} data
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
-    function request(url, data, onSuccess, onError) {
-      $.ajax({
-        url: url,
-        dataType: 'jsonp',
-        contentType: 'application/json',
-        data: data,
-        success: onSuccess,
-        error: onError
-      });
-    }
-
-    /**
-     * Stop default behaviour
-     * @param event
-     */
-    function cancelEvent(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    /**
-     * Parse fields from config
-     * @param {String} fields
-     */
-    function parseFields(fields = '') {
-      let result = [];
-
-      fields.split(',').map(field => field.trim()).forEach(field => {
-        if (!field.includes(':')) {
-          throw new Error(`${field} should be in format: 0:FIELD1...`);
-        }
-
-        let [ key, value ] = field.split(':');
-        result[key] = value;
-      });
-
-      return result;
-    }
-
+  $.fn.MailChimpForm = function (options) {
     /**
      * Main handler
      */
@@ -64,10 +18,11 @@
         inputSelector: 'input',
         errorSelector: '.mc-error',
         submitSelector: '',
-        onFail: function (message) {
+        customMessages: {},
+        onFail: (message) => {
           console.error(message);
         },
-        onOk: function (message) {
+        onOk: (message) => {
           console.log(message);
         }
       }, options);
@@ -100,41 +55,23 @@
         resetErrors();
 
         request(cfg.url.replace('/post?', '/post-json?').concat('&c=?'), getData(),
-          function (res) {
-            if (res.result === 'error') {
-              let inputIndex;
-              let errorMessage = res.msg;
+          function (response) {
+            const mcr = new McResponse(response, cfg.customMessages);
 
-              if (errorMessage.substr(1, 4).indexOf('-') >= 0) {
-                let result = res.msg.split('-').map(item => item.trim());
-                inputIndex = result[0];
-                errorMessage = result[1];
-              }
-
-              onError(errorMessage, inputIndex);
-            } else if (res.result === 'success') {
-              cfg.onOk(res.msg);
+            if (mcr.isError && !isNaN(mcr.input)) {
+              inputs[mcr.input].$errorEl.text(mcr.message);
+              inputs[mcr.input].$inputEl.trigger('mc:input:error');
+            } else if (mcr.isError && isNaN(mcr.input)) {
+              cfg.onFail(mcr.message);
+            } else {
+              cfg.onOk(mcr.message);
             }
           },
-          function (err) {
+          function (error) {
             cfg.onFail('MailChip error occurred');
           }
         );
       });
-
-      /**
-       * Internal error handler
-       * @param {String} message
-       * @param {Number} inputIndex
-       */
-      function onError(message, inputIndex) {
-        if (inputIndex) {
-          inputs[inputIndex].$errorEl.text(message);
-          inputs[inputIndex].$inputEl.trigger('mc:input:error');
-        } else {
-          cfg.onFail(message);
-        }
-      }
 
       /**
        * Reset previous errors
@@ -160,9 +97,89 @@
           let item = inputs[index];
           data[item.name] = item.$inputEl.val();
         }
+
         return data;
       }
     });
   };
+
+  /**
+   * Ajax request wrapper
+   * @param {String} url
+   * @param {Object} data
+   * @param {Function} onSuccess
+   * @param {Function} onError
+   */
+  function request(url, data, onSuccess, onError) {
+    $.ajax({
+      url: url,
+      dataType: 'jsonp',
+      contentType: 'application/json',
+      data: data,
+      success: onSuccess,
+      error: onError
+    });
+  }
+
+  /**
+   * Stop default behaviour
+   * @param event
+   */
+  function cancelEvent(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  /**
+   * Parse fields from config
+   * @param {String} fields
+   */
+  function parseFields(fields = '') {
+    let result = [];
+
+    fields.split(',').map(field => field.trim()).forEach(field => {
+      if (!field.includes(':')) {
+        throw new Error(`${field} should be in format: 0:FIELD1`);
+      }
+
+      let [ key, value ] = field.split(':');
+      result[key] = value;
+    });
+
+    return result;
+  }
+
+  function McResponse(response, mapping = {}) {
+    this.inputId = NaN;
+    this.message = response.msg;
+    this.isError = response.result === 'error';
+    this.mapping = {
+      E001: /^Please enter a value/i,
+      E002: /^Please enter the date/i,
+      E003: /^An email address must contain a single/i,
+      E004: /^The domain portion of the email address is invalid/i,
+      E005: /^Too many subscribe attempts for this email address/i,
+      S001: /^Almost finished... We need to confirm your email/i,
+    };
+
+    let matches = this.message.match(/^(\d+)\s?-\s?(.*)$/);
+    if (matches) {
+      this.inputId = parseInt(matches[1]);
+      this.message = matches[2];
+    }
+
+    this.code = Object.keys(this.mapping).find(code => this.mapping[code].test(this.message)) || 'UNCAUGHT';
+
+    if (this.code === 'UNCAUGHT') {
+      console.warn('In order to improve this plugin, please send the info below to the author.');
+      console.warn(response);
+    }
+
+    return {
+      input: this.inputId,
+      message: mapping[this.code] ? mapping[this.code] : this.message,
+      isError: this.isError
+    };
+  }
 
 })(jQuery);
