@@ -10,8 +10,10 @@ This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [aja
 > Make sure you have jQuery v1.9+ included in your project
 
 ### Motivation
-
 Using `jquery-mailchimp` you can refactor the code in following way:
+<details>
+    <summary>Example</summary>
+    
 ```diff
 - <!-- Begin MailChimp Signup Form -->
 - <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
@@ -44,9 +46,9 @@ Using `jquery-mailchimp` you can refactor the code in following way:
 -         </div>
 -     </form>
 - </div>
-+ <form id="#subscribe-form">
++ <form id="subscribe-form">
 +   <div class="mc-form-group-EMAIL">
-+     <input type="text" name="EMAIL" placeholder="Email">
++     <input type="mail" name="EMAIL" placeholder="Email">
 +     <div class="mc-error"></div>
 +   </div>
 +   <div class="mc-form-group-FULLNAME">
@@ -71,6 +73,7 @@ Using `jquery-mailchimp` you can refactor the code in following way:
 </script>
 - <!--End mc_embed_signup-->
 ```
+</details>
 
 Just pick minimal required data as:
 
