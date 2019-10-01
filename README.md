@@ -9,55 +9,70 @@ This is a jQuery plugin to simplify work with MailChimp forms. (inspired by [aja
 
 > Make sure you have jQuery v1.9+ included in your project
 
-### Required data
-
+### Motivation
+Using `jquery-mailchimp` you can refactor the code in following way:
 <details>
-<summary>Instead of using MailChimp's standard embedded forms</summary>
-
-```html
-<!-- Begin MailChimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-  #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-</style>
-<div id="mc_embed_signup">
-    <form action="https://github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&amp;id=5b10837812" 
-          method="post" id="mc-embedded-subscribe-form" 
-          name="mc-embedded-subscribe-form" class="validate" 
-          target="_blank" novalidate>
-        <div id="mc_embed_signup_scroll">
-            <h2>Subscribe to our mailing list</h2>
-            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-            <div class="mc-field-group">
-                <label for="mce-EMAIL">Email Address </label>
-                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-            </div>
-            <div class="mc-field-group">
-                <label for="mce-FULLNAME">Full Name </label>
-                <input type="text" value="" name="FULLNAME" class="" id="mce-FULLNAME">
-            </div>
-            <div id="mce-responses" class="clear">
-                <div class="response" id="mce-error-response" style="display:none"></div>
-                <div class="response" id="mce-success-response" style="display:none"></div>
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="xxx" tabindex="-1" value=""></div>
-            <div class="clear">
-            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-        </div>
-    </form>
-</div>
-<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+    <summary>Example</summary>
+    
+```diff
+- <!-- Begin MailChimp Signup Form -->
+- <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+- <style type="text/css">
+-   #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+- </style>
+- <div id="mc_embed_signup">
+-     <form action="https://github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&amp;id=5b10837812" 
+-           method="post" id="mc-embedded-subscribe-form" 
+-           name="mc-embedded-subscribe-form" class="validate" 
+-           target="_blank" novalidate>
+-         <div id="mc_embed_signup_scroll">
+-             <h2>Subscribe to our mailing list</h2>
+-             <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+-             <div class="mc-field-group">
+-                 <label for="mce-EMAIL">Email Address </label>
+-                 <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+-             </div>
+-             <div class="mc-field-group">
+-                 <label for="mce-FULLNAME">Full Name </label>
+-                 <input type="text" value="" name="FULLNAME" class="" id="mce-FULLNAME">
+-             </div>
+-             <div id="mce-responses" class="clear">
+-                 <div class="response" id="mce-error-response" style="display:none"></div>
+-                 <div class="response" id="mce-success-response" style="display:none"></div>
+-             </div>
+-             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="xxx" tabindex="-1" value=""></div>
+-             <div class="clear">
+-             <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+-         </div>
+-     </form>
+- </div>
++ <form id="subscribe-form">
++   <div class="mc-form-group-EMAIL">
++     <input type="mail" name="EMAIL" placeholder="Email">
++     <div class="mc-error"></div>
++   </div>
++   <div class="mc-form-group-FULLNAME">
++     <input type="text" name="FULLNAME" placeholder="Full name">
++     <div class="mc-error"></div>
++   </div>
++   <button id="submit-form">Subscribe</button>
++ </form>
+- <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
 <script type='text/javascript'>
-  (function($) {
-    window.fnames = new Array(); 
-    window.ftypes = new Array();
-    fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FULLNAME';ftypes[1]='text';
-  }(jQuery));
-  var $mcj = jQuery.noConflict(true);
+-   (function($) {
+-     window.fnames = new Array(); 
+-     window.ftypes = new Array();
+-     fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FULLNAME';ftypes[1]='text';
+-   }(jQuery));
+-   var $mcj = jQuery.noConflict(true);
++   $('#subscribe-form').MailChimpForm({
++     url: '//github.us16.list-manage.com/subscribe/post?u=21d66d0fb5dc3af7cb8a859fa&id=5b10837812',
++     fields: '0:EMAIL,1:FULLNAME',
++     submitSelector: '#submit-form'
++   });
 </script>
-<!--End mc_embed_signup-->
+- <!--End mc_embed_signup-->
 ```
-
 </details>
 
 Just pick minimal required data as:
